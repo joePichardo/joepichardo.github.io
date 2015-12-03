@@ -1,0 +1,36 @@
+# Site settings
+title: CodePortfolio - A blog for my projects
+email: josephpichar@gmail.com
+description: A blog about my projects and material I find noteworthy. 
+url: "http://joepichardo.com" # the base hostname & protocol for your site
+twitter_username: PichardoJoe
+gems :
+  - jekyll-paginate
+paginate: 5
+paginate_path: "page:num"
+
+# Build settings
+markdown: kramdown
+permalink: /:title
+
+#Default settings
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "posts" # previously `post` in Jekyll 2.2.
+    values:
+      author: Joe Pichardo
+      layout: "post"
+      category: code
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+      type: "pages" # previously `post` in Jekyll 2.2.
+    values:
+      layout: "page"
+
+
+
+
+
