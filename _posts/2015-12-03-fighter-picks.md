@@ -1,6 +1,5 @@
 ---
 title:  "Pick your fighters!"
-date:   2015-11-30 23:39:44 -0700
 permalink: pick-fighters
 ---
 
