@@ -1,0 +1,321 @@
+<html>
+<head>
+	<style type="text/css">
+#listWrapper{
+	
+}
+#fighterListLeft{
+	float:left;
+	width: 288px;
+	overflow:hidden;
+	margin: 0px 0 30px 0;
+}
+#fighterListRight{
+	float:left;
+	width:288px;
+	overflow:hidden;
+	margin: 0px 0 30px 0;
+} 
+input[type="radio"]{
+	width: 10%;
+	display: inline-block;
+}
+label { 
+	display: block;
+}
+#submitButton{
+	margin: 0px 10px 10px 0;
+	width: 40%;
+	float: left;
+	clear:left;
+}
+
+#resetButton{
+		width: 40%;
+	float: left;
+}
+
+#output {
+	margin: 0 0 0 2em;
+	padding: inherit;
+}
+
+	</style>
+	<title></title>
+</head>
+<body>
+	<form id="listWrapper">
+		<div id="fighterListLeft"> </div>
+		<div id="fighterListRight"> </div>	
+		<input  id="submitButton" type="button" onclick="submitPicks()" value="Submit Picks">
+		<input  id="resetButton" type="button" onclick="resetPicks()" value="Reset Picks">
+	</form>	
+	<script>
+
+	//array of objects for fighters name and price to be accessed
+	var fighters = [
+	{
+		name: "Paige VanZant",
+		price: 4900
+	},
+		{
+		name: "Rose Namajunas",
+		price: 5300
+	},
+
+	{
+		name: "Jim Miller",
+		price: 4900
+	},
+		{
+		name: "Michael Chiesa",
+		price: 4700
+	},
+
+	{
+		name: "Sage Northcutt",
+		price: 5800
+	},
+	{
+		name: "Cody Pfister",
+		price: 3800
+	},
+
+	{
+		name: "Elias Theodorou",
+		price: 5400
+	},
+	{
+		name: "Thiago Santos",
+		price: 4200
+	},		
+
+	{
+		name: "Tim Means",
+		price: 5200
+	},	
+	{
+		name: "John Howard",
+		price: 4400
+	},		
+
+	{
+		name: "Omari Akhemdov",
+		price: 5000
+	},
+	{
+		name: "Sergio Moraes",
+		price: 4600
+	},		
+	{
+		name: "Antonio Carlos Junior",
+		price: 4800
+	},
+	{
+		name: "Kevin Casey",
+		price: 4800
+	},
+
+	{
+		name: "Aljamain Sterling",
+		price: 5300
+	},
+	{
+		name: "Johnny Eduardo",
+		price: 4300
+	},
+
+	{
+		name: "Santiago Panzinibbio",
+		price: 5200
+	},
+	{
+		name: "Andreas Stahl",
+		price: 4400
+	},
+
+	{
+		name: "Danny Roberts",
+		price: 4800
+	},
+	{
+		name: "Nathan Coy",
+		price: 4600
+	},
+
+	{
+		name: "Zubaira Tukhugov",
+		price: 4900
+	},
+	{
+		name: "Phillipe Nover",
+		price: 4700
+	},
+
+	{
+		name: "Kailin Curran",
+		price: 5400
+	},
+	{
+		name: "Emily Kagan",
+		price: 4200
+	},
+
+];
+
+/*
+NEXT MILESTONE
+Put all labels and radios into a form
+add a submit and reset button at the end
+give functions to submit and reset buttons
+
+*/
+
+//elements variable for easy access
+var fighterListLeft = document.getElementById("fighterListLeft");
+var fighterListRight = document.getElementById("fighterListRight");
+
+//j is used to appropiate radio buttons and their id's
+var j = 0; 
+
+//looping through array of fighters to print on page
+//opposing fighters are set across each other on same line but in different divs
+	//if even add to left div else to right div
+	//radio buttons added with variable j (it increases once opposing competitor is added in else statement)
+for (var i = 0; i < fighters.length; i += 1){
+	if(i % 2 == 0){
+		var radio = document.createElement('input');
+		radio.type = "radio";
+		radio.name = "fight" + j;
+		radio.value = fighters[i].name; //fighter name is here to access radio button value later 
+		radio.id = "rad" + i;
+
+		var label = document.createElement('label');
+		label.htmlFor = "rad" + i;
+
+		//radio is appended to the end of label then the name of fighter is added 
+		// it should look like this <label><input> FighterName </label>
+		// finally it is added to the div element
+		//radio and label are inline because of css style on top of the page
+		label.appendChild(radio); 
+		label.appendChild(document.createTextNode(fighters[i].name + " " + fighters[i].price));
+		fighterListLeft.appendChild(label);
+
+	}
+	else{
+		var radio = document.createElement('input');
+		radio.type = "radio";
+		radio.name = "fight" + j;
+		radio.value = fighters[i].name;
+		radio.id = "rad" + i;
+
+		var label = document.createElement('label');
+		label.htmlFor = "rad" + i;
+
+		label.appendChild(radio);
+		label.appendChild(document.createTextNode(fighters[i].name + " " + fighters[i].price));
+		fighterListRight.appendChild(label);
+
+		j++;
+
+		
+	}
+
+}
+
+var textToDisplay = "";
+var addedSalary = 0;
+/* arr[]  ---> Input Array
+data[] ---> Temporary array to store current combination
+start & end ---> Staring and Ending indexes in arr[]
+index  ---> Current index in data[]
+r ---> Size of a combination to be printed */
+function combinationUtil( start, end, index)
+{
+	var tempText = "";
+  // Current combination is ready to be printed, print it
+  if (index == 5)
+      for (var j=0; j < 5; j++){
+        tempText += data[j].name +" <br>";
+        addedSalary += data[j].price;
+
+        if(j == 4){
+        	if ( addedSalary <= 25000) {
+        		textToDisplay += tempText + "<strong>" + addedSalary + "</strong>" + "<br><br>";
+        		addedSalary = 0;
+        	} else{
+	        	//textToDisplay += tempText + addedSalary +"<br><br>";
+	        	addedSalary = 0;
+	        	}
+
+        }	
+		}
+  
+
+  // replace index with all possible elements. The condition
+  // "end-i+1 >= r-index" makes sure that including one element
+  // at index will make a combination with remaining elements
+  // at remaining positions
+  for (var i=start; i <= end && end >= 5-index; i++)
+  {
+      data[index] = fightersPicked[i];
+      combinationUtil(i+1, end, index+1);
+  }
+}
+
+var data = new Array(5);
+// The main function that prints all combinations of size r
+// in arr[] of size n. This function mainly uses combinationUtil()
+function printCombination( n )
+{
+  // A temporary array to store all combination one by one
+  
+
+  // Print all combination using temprary array 'data[]'
+  combinationUtil( 0, n-1, 0);
+} 
+
+var fightersPicked = new Array ();
+
+function SortCombinations(){
+
+	for(var i = 0; i < fighters.length; i ++){
+		var radioBtn = document.getElementById("rad" + i); 
+		if( radioBtn.checked ){
+			fightersPicked.push(fighters[i]);
+		}
+	}
+
+}
+
+function submitPicks() {
+
+	textToDisplay = "";
+	fightersPicked.length = 0;
+	addedSalary = 0; 
+
+	SortCombinations();
+
+	printCombination( fightersPicked.length);
+	if(textToDisplay == ""){
+		textToDisplay = "Oops! Looks like either you didn't pick more than 5 fighters, or the different combinations of your picks are greater than the Salary Cap of 25,000. Try picking some low cost fighters.";
+	}
+	document.getElementById("output").innerHTML = textToDisplay;
+}
+
+function resetPicks() {
+	document.getElementById("listWrapper").reset();
+	document.getElementById("output").innerHTML ="Different combinations will output here!";
+
+}
+
+
+var outputDiv = document.createElement('p');
+outputDiv.id = 'output';
+document.body.appendChild(outputDiv);
+
+document.getElementById("output").innerHTML ="Different combinations will output here!";
+
+	</script>
+</body>
+</html>
